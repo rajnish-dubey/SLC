@@ -1,0 +1,6 @@
+.venv
+resources
+*.keras
+output
+output2
+data
