@@ -12,12 +12,17 @@ for label in [str(i) for i in range(10)] + list(string.ascii_uppercase):
 
 # Configuration
 minValue = 70
-save_binary = False #Toggle to save processed binary images or original ROI
+save_binary = False  # Toggle to save processed binary images or original ROI
 frame_delay = 10
+roi_size = 400  # Size of ROI square
 
 # Initialize camera
 cap = cv2.VideoCapture(0)
 last_key = None
+
+# Create resizable window for test image
+cv2.namedWindow("test", cv2.WINDOW_NORMAL)
+cv2.resizeWindow("test", 300, 300)
 
 while True:
     ret, frame = cap.read()
@@ -25,6 +30,13 @@ while True:
         continue
 
     frame = cv2.flip(frame, 1)  # Flip for mirror view
+    frame_height, frame_width = frame.shape[:2]
+
+    # Center ROI
+    center_x, center_y = frame_width // 2, frame_height // 2
+    half_size = roi_size // 2
+    x1, y1 = center_x - half_size, center_y - half_size
+    x2, y2 = center_x + half_size, center_y + half_size
 
     # Count number of images already captured per label
     count = {}
@@ -32,20 +44,19 @@ while True:
         count[label] = len(os.listdir(f"data/{label}"))
 
     # Display count of captured images
-    y_offset = 70
+    y_offset = 30
     for label in [str(i) for i in range(10)] + list(string.ascii_lowercase):
         upper_label = label.upper() if label.isalpha() else label
         text = f"{upper_label} : {count[upper_label]}"
         cv2.putText(frame, text, (10, y_offset), cv2.FONT_HERSHEY_PLAIN, 1, (0, 255, 255), 1)
-        y_offset += 10
+        y_offset += 15
 
-    # Define region of interest (ROI)
-    x1, y1, x2, y2 = 220, 10, 620, 410
-    cv2.rectangle(frame, (x1 - 1, y1 - 1), (x2 + 1, y2 + 1), (255, 0, 0), 1)
+    # Draw ROI and extract it
+    cv2.rectangle(frame, (x1 - 1, y1 - 1), (x2 + 1, y2 + 1), (255, 0, 0), 2)
     roi = frame[y1:y2, x1:x2]
 
     cv2.imshow("Frame", frame)
-    
+
     # Preprocess ROI
     gray = cv2.cvtColor(roi, cv2.COLOR_BGR2GRAY)
     blur = cv2.GaussianBlur(gray, (5, 5), 2)
@@ -54,7 +65,9 @@ while True:
     _, test_image = cv2.threshold(th3, minValue, 255, cv2.THRESH_BINARY_INV + cv2.THRESH_OTSU)
     test_image = cv2.resize(test_image, (128, 128))
 
-    cv2.imshow("test", test_image)
+    # Resize test image for better visibility
+    test_display = cv2.resize(test_image, (256, 256), interpolation=cv2.INTER_NEAREST)
+    cv2.imshow("test", test_display)
 
     interrupt = cv2.waitKey(frame_delay)
     key_pressed = chr(interrupt & 0xFF).lower() if interrupt != -1 else None

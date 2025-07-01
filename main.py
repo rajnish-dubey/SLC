@@ -16,7 +16,7 @@ class SignLanguageApp:
         print("Loading model...")
         self.model = None
         try:
-            self.model = tf.keras.models.load_model('models/model-bw-best.keras')
+            self.model = tf.keras.models.load_model('models/model-bw-final.keras')
             print("Model loaded successfully!")
             print("Model input shape:", self.model.input_shape)
             print("Model output shape:", self.model.output_shape)
@@ -142,7 +142,7 @@ class SignLanguageApp:
                 8: "I", 9: "J", 10: "K", 11: "L", 12: "M", 13: "N", 14: "O", 15: "P",
                 16: "Q", 17: "R", 18: "S", 19: "T", 20: "U", 21: "V", 22: "W", 23: "X",
                 24: "Y", 25: "Z", 26: "1", 27: "2", 28: "3", 29: "4", 30: "5", 31: "6",
-                32: "7", 33: "8", 34: "9"
+                32: "7", 33: "8", 34: "9", 35: "0"
             }
 
             predicted_char = char_map.get(int(predicted_class), "?")

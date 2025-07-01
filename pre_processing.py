@@ -20,8 +20,8 @@ def process_image(path: str, min_value: int = 70) -> 'np.ndarray':
 
 # Input: colored images downloaded from Kaggle
 #data for training change it to your dataset
-input_path = Path("resources/Indian")  
-output_path = Path("output") #data for model
+input_path = Path("data_collect")  
+output_path = Path("output2") #data for model
 train_path = output_path / "train"
 test_path = output_path / "test"
 

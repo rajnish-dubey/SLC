@@ -33,15 +33,17 @@ ENV/
 *.swp
 *.swo
 
-# # Model files
-# *.h5
-# *.keras
-# *.weights
+# Model files
+*.h5
+*.keras
+*.weights
+models
 
 # Misc
 .DS_Store
 Thumbs.db
 
 output
-data
+output2
+data_collect
 resources
