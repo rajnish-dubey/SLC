@@ -37,6 +37,7 @@ ENV/
 *.h5
 *.keras
 *.weights
+*.png
 models
 
 # Misc

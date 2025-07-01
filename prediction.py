@@ -9,7 +9,7 @@ class ISLPredictor:
         self.model_path = model_path
         self.model = None
         self.class_names = [
-             '1', '2', '3', '4', '5', '6', '7', '8', '9',
+            '1', '2', '3', '4', '5', '6', '7', '8', '9',
             'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M',
             'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'
         ]
@@ -42,7 +42,7 @@ class ISLPredictor:
             image = cv2.resize(image, (64, 64))
             
             # Normalize pixel values to [0, 1]
-            image = image.astype('float32') / 255.0
+            image = image.astype('float32') / 255.0/home/dubey/Desktop/indian_sign_language/output2/train/N/27.jpg
             
             # Add batch dimension
             image = np.expand_dims(image, axis=0)
