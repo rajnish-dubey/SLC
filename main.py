@@ -104,11 +104,8 @@ class SignLanguageApp:
             # Resize to match model input size
             resized = cv2.resize(gray, (self.input_size, self.input_size))
             
-            # Apply binary thresholding
-            _, binary = cv2.threshold(resized, 127, 255, cv2.THRESH_BINARY)
-            
-            # Normalize to [0,1]
-            normalized = binary.astype('float32') / 255.0
+            # Normalize to [0,1] - matching the training preprocessing
+            normalized = resized.astype('float32') / 255.0
             
             # Add dimensions to match model input shape
             processed = np.expand_dims(normalized, axis=-1)
@@ -117,7 +114,7 @@ class SignLanguageApp:
             debug_info = f"Shape after processing: {processed.shape}, Range: [{processed.min():.2f}, {processed.max():.2f}]"
             self.debug_label.config(text=debug_info)
             
-            return processed, binary
+            return processed, resized  # Return resized instead of binary for display
         except Exception as e:
             print("Error in preprocessing:", str(e))
             return None, None
