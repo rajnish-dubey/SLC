@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Indian Sign Language Converter</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="logo">
+            <i class="fas fa-hands"></i>
+            <h1>Indian Sign Language Converter</h1>
+        </div>
+        <div class="nav-links">
+            <a href="#" class="active" id="homeLink">Home</a>
+            <a href="#" id="cameraLink">Translate</a>
+            <a href="#">About</a>
+            <a href="#">Contact</a>
+        </div>
+    </nav>
+
+    <!-- Landing Page -->
+    <div class="container active" id="homePage">
+        <div class="landing-page">
+            <h2>Bridging Communication with Technology</h2>
+            <p>Our AI-powered sign language converter helps bridge the communication gap by translating Indian Sign
+                Language gestures into text in real-time. Start communicating seamlessly today!</p>
+
+            <button class="btn" id="startBtn">
+                <i class="fas fa-camera"></i> Start Translation
+            </button>
+
+            <div class="features">
+                <div class="feature-card">
+                    <i class="fas fa-bolt"></i>
+                    <h3>Real-Time Translation</h3>
+                    <p>Get instant translations of sign language gestures with minimal delay</p>
+                </div>
+
+                <div class="feature-card">
+                    <i class="fas fa-hands"></i>
+                    <h3>35 Signs Supported</h3>
+                    <p>Comprehensive vocabulary covering daily communication needs</p>
+                </div>
+
+                <div class="feature-card">
+                    <i class="fas fa-brain"></i>
+                    <h3>Advanced AI Model</h3>
+                    <p>Powered by deep learning for high accuracy recognition</p>
+                </div>
+
+                <div class="feature-card">
+                    <i class="fas fa-mobile-alt"></i>
+                    <h3>Mobile Friendly</h3>
+                    <p>Works seamlessly on smartphones, tablets, and desktops</p>
+                </div>
+            </div>
+
+            <div class="instructions">
+                <h3><i class="fas fa-lightbulb"></i> How to Use</h3>
+                <div class="steps">
+                    <p>1. Click "Start Translation" to open the camera</p>
+                    <p>2. Position your hands clearly in the frame</p>
+                    <p>3. Make the sign you want to translate</p>
+                    <p>4. View the translated text instantly</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Camera Page -->
+    <div class="container" id="cameraPage">
+        <div class="camera-page">
+            <div class="camera-header">
+                <h2><i class="fas fa-sign-language"></i> Sign Language Translator</h2>
+                <p>Position your hands within the frame and perform the sign you want to translate. Ensure good lighting
+                    and a clear background for best results.</p>
+            </div>
+
+            <div class="camera-container">
+                <div class="camera-placeholder" id="cameraPlaceholder">
+                    <i class="fas fa-video"></i>
+                    <p>Camera feed will appear here when activated</p>
+                </div>
+                <img src="{{ url_for('video_feed') }}" class="video-feed" id="videoFeed">
+                <div class="word-formation">
+                    <h3>Formed Word:</h3>
+                    <div id="formedWord" class="formed-word"></div>
+                    <button class="btn secondary" id="clearWordBtn">
+                        <i class="fas fa-eraser"></i> Clear Word
+                    </button>
+                </div>
+            </div>
+
+            <div class="controls">
+                <button class="btn secondary" id="backBtn">
+                    <i class="fas fa-arrow-left"></i> Back to Home
+                </button>
+            </div>
+
+            <div class="result-container">
+                <div class="result-header">
+                    <i class="fas fa-language"></i>
+                    <h3>Live Translation</h3>
+                </div>
+                <p>Current gesture:</p>
+                <div class="prediction-text" id="predictionText">
+                    Waiting for gesture...
+                </div>
+                <p class="confidence" id="confidenceText">Confidence: --</p>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>Indian Sign Language Converter | Bridging Communication Gaps with AI Technology</p>
+        <p>© 2023 SignTranslate. All rights reserved.</p>
+    </footer>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+
+</html>
